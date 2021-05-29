@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Home from "./Home";
+
+const Dummy_Task = [
+  {
+    id: "e1",
+    title: "Welcome to my ToDo List",
+  },
+  {
+    id: "e2",
+    title: "Winter is coming",
+  },
+  {
+    id: "e3",
+    title: "UCL in two days",
+  },
+];
 
 function App() {
+  const [taskList, setTaskList] = useState(Dummy_Task);
+
+  const updateAddedTask = (updatedTask) => {
+    setTaskList((prevState) => {
+      return [...prevState, updatedTask];
+    });
+    console.log('From app.js');
+    console.log(updatedTask);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Home tasks={taskList} onAddingTask={updateAddedTask} />
     </div>
   );
 }
